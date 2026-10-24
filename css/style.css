@@ -446,7 +446,7 @@ html.lenis, html.lenis body { height: auto; }
    Page hero (departments / doctors / hospital)
    ========================================================= */
 .phero { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: end; gap: 28px 48px; padding: calc(var(--hdr) + clamp(56px, 8vw, 110px)) var(--pad) 0; }
-.phero h1 { margin-top: 20px; font-size: clamp(50px, 7.6vw, 124px); line-height: .9; letter-spacing: -.058em; }
+.phero h1 { margin-top: 20px; font-size: clamp(48px, 7.2vw, 112px); line-height: 1.05; letter-spacing: -.035em; }
 .phero__side { display: grid; gap: 22px; justify-items: start; padding-bottom: 10px; }
 .phero__side p { max-width: 40ch; font-size: 17.5px; color: var(--ink-2); }
 .ecg { grid-column: 1 / -1; display: block; width: 100%; height: clamp(64px, 8vw, 110px); margin-top: 24px; overflow: visible; }

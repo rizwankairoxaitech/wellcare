@@ -5,6 +5,7 @@ node_modules/
 .preview/
 .claude/
 __pycache__/
+wellcare-next/
 
 # archive copy of wellcare-hospital-images/
 *.zip

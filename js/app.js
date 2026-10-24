@@ -535,7 +535,7 @@ function initMorphFigures() {
         delete label.dataset.final;
         label.textContent = CAPTION[key] || key;
         if (label.tagName === 'A') label.href = `#${key}`;
-        if (motion) scramble(label, { duration: 0.8 });
+        gsap.fromTo(label, { opacity: 0.5 }, { opacity: 1, duration: 0.3 });
       }
       if (idx && mode === 'cycle' && i >= 0) idx.textContent = `${String(i + 1).padStart(2, '0')} / ${String(keys.length).padStart(2, '0')}`;
     };
