@@ -1,0 +1,50 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book an Appointment | Wellcare Hospital Trichy</title>
+  <meta name="description" content="Book a Wellcare Hospital appointment in under a minute: describe your concern, pick a doctor and time, and get your appointment pass.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -9 64 64' fill='none' stroke-linecap='round'%3E%3Ccircle cx='11.5' cy='6.5' r='3.6' fill='%235a45d6'/%3E%3Cpath d='M2.5 9.5Q9 19.5 20.5 6.5M13.2 15.2Q16.4 21.5 17.6 28.5' stroke='%235a45d6' stroke-width='3.4'/%3E%3Cpath d='M10.6 15.4Q6.2 25 9.6 34.5Q15.5 44.5 32 41Q47 37.5 62 27' stroke='%238f7ef3' stroke-width='3.6'/%3E%3Ccircle cx='25' cy='11' r='3' fill='%23d46fd0'/%3E%3Cpath d='M18.8 14Q24.6 21.5 31.6 12.6M24.2 18.6Q22.2 24 21.6 29.5M26.4 18.6Q28.6 23.6 29.2 29' stroke='%23d46fd0' stroke-width='3'/%3E%3Ccircle cx='38' cy='7' r='3.4' fill='%235b9dff'/%3E%3Cpath d='M30.5 10.6Q37 19.5 46.5 6.5M37 16.6Q35 23 34.2 30M39.4 16.6Q42.2 22.8 43.2 30' stroke='%235b9dff' stroke-width='3.2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="appointment">
+  <a class="skip" href="#main">Skip to content</a>
+  <div data-site-header></div>
+
+  <main id="main" class="apt">
+    <header class="apt__intro">
+      <div class="apt__copy">
+        <p class="hud" data-scramble><span class="dot dot--ok"></span> Appointment concierge</p>
+        <h1 data-split>Book a visit in<br><span class="grad">under a minute.</span></h1>
+        <p>Three quick steps — no long forms. Choose a department and the model takes its shape. For emergencies don’t book: call <a href="tel:+914312742111">0431 274 2111</a>.</p>
+      </div>
+      <figure class="morph" data-morph="booking" data-keys="cross">
+        <canvas class="morph__gl" aria-hidden="true"></canvas>
+        <span class="morph__frame" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span class="morph__hud" aria-hidden="true">Live particle model</span>
+        <figcaption class="morph__cap">
+          <span class="morph__label" data-morph-label></span>
+          <span class="morph__idx" data-morph-idx></span>
+        </figcaption>
+      </figure>
+    </header>
+
+    <div class="apt__host" data-booking-inline></div>
+
+    <section class="apt__alt" aria-label="Other ways to book">
+      <a class="ccard" href="https://wa.me/919994025000" target="_blank" rel="noopener"><span class="hud">Prefer chat?</span><strong>WhatsApp +91 99940 25000</strong><i>Open WhatsApp <svg class="i" aria-hidden="true"><use href="#i-arrow-ur"/></svg></i></a>
+      <a class="ccard" href="tel:+914312742112"><span class="hud">Prefer to talk?</span><strong>Desk +91 431 274 2112</strong><i>Call the desk <svg class="i" aria-hidden="true"><use href="#i-arrow-ur"/></svg></i></a>
+      <a class="ccard ccard--sos" href="tel:+914312742111"><span class="hud hud--light"><span class="dot dot--alert"></span> Emergency</span><strong>+91 431 274 2111</strong><i>Call now <svg class="i" aria-hidden="true"><use href="#i-arrow-ur"/></svg></i></a>
+    </section>
+  </main>
+
+  <div data-site-footer></div>
+
+  <!-- One bundled script (Three.js, GSAP, Lenis + site code) so the pages also work when opened straight from disk. Rebuild with: npm run build -->
+  <script src="js/wellcare.bundle.js" defer></script>
+</body>
+</html>

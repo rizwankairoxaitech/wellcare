@@ -1,0 +1,15 @@
+# dependencies (restore with `npm install`; only needed to rebuild js/wellcare.bundle.js)
+node_modules/
+
+# local tooling, test captures and browser test profiles
+.preview/
+.claude/
+__pycache__/
+
+# archive copy of wellcare-hospital-images/
+*.zip
+
+# OS clutter
+.DS_Store
+Thumbs.db
+desktop.ini

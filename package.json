@@ -1,0 +1,16 @@
+{
+  "name": "wellcare-hospital-site",
+  "private": true,
+  "type": "module",
+  "description": "Wellcare Hospital website. js/*.js are the sources; npm run build bundles them into js/wellcare.bundle.js so the pages also work when opened straight from disk.",
+  "scripts": {
+    "build": "esbuild js/app.js --bundle --format=iife --minify --target=es2019 --legal-comments=none --outfile=js/wellcare.bundle.js",
+    "watch": "esbuild js/app.js --bundle --format=iife --target=es2019 --outfile=js/wellcare.bundle.js --watch"
+  },
+  "devDependencies": {
+    "esbuild": "0.23.1",
+    "gsap": "3.12.5",
+    "lenis": "1.1.13",
+    "three": "0.160.0"
+  }
+}
