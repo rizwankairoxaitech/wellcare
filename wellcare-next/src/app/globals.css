@@ -1,0 +1,188 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+/* =========================================================
+   Wellcare design tokens
+   White canvas, ink type and the DNA gradient (violet → pink → blue),
+   with mono HUD labels and glass panels for the futuristic layer.
+   ========================================================= */
+@theme {
+  /* breakpoints follow the original design: phone ≤640, tablet ≤900, laptop ≤1180, wide ≤1380 */
+  --breakpoint-*: initial;
+  --breakpoint-sm: 641px;
+  --breakpoint-md: 901px;
+  --breakpoint-lg: 1181px;
+  --breakpoint-xl: 1381px;
+
+  --color-ink: #0e0e12;
+  --color-ink-2: #3b3b45;
+  --color-muted: #6b6b78;
+  --color-muted-2: #a4a4b2;
+  --color-line: #e8e7ef;
+  --color-line-2: #d6d4e3;
+  --color-soft: #f6f5fa;
+  --color-tint: #efecfd;
+  --color-canvas: #fbfbfe;
+  --color-violet: #8f7ef3;
+  --color-violet-ink: #5a45d6;
+  --color-pink: #e27ad8;
+  --color-blue: #6aa6ff;
+  --color-alert: #e5484d;
+  --color-alert-ink: #c6282e;
+  --color-alert-soft: #fdeeee;
+  --color-ok: #17a673;
+  --color-night: #140c10;
+
+  --font-sans: var(--font-inter-tight), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --ease-smooth: cubic-bezier(.22, 1, .36, 1);
+  --ease-curtain: cubic-bezier(.76, 0, .24, 1);
+
+  --shadow-glow: 0 30px 80px -40px rgba(58, 40, 160, .35);
+  --shadow-float: 0 24px 60px -36px rgba(14, 14, 18, .35);
+  --radius-card: 24px;
+
+  --animate-ping-dot: ping-dot 2.2s cubic-bezier(.22, 1, .36, 1) infinite;
+  --animate-ticker: ticker 48s linear infinite;
+  --animate-scan: scan 1.6s cubic-bezier(.22, 1, .36, 1) 1;
+  --animate-sweep: sweep 6s linear infinite;
+  --animate-draw: draw 2.6s cubic-bezier(.22, 1, .36, 1) .3s forwards;
+  --animate-rise: rise .6s cubic-bezier(.22, 1, .36, 1);
+
+  @keyframes ping-dot { 0% { transform: scale(.6); opacity: .9; } 100% { transform: scale(2.2); opacity: 0; } }
+  @keyframes ticker { to { transform: translateX(-50%); } }
+  @keyframes scan { 0% { top: -30%; opacity: 1; } 100% { top: 110%; opacity: 1; } }
+  @keyframes sweep { to { top: 100%; } }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+}
+
+/* `intro:` — styles that apply only while the first-visit intro is playing (<html data-intro="1">) */
+@custom-variant intro (html[data-intro="1"] &);
+
+/* layout rhythm shared by every section */
+:root {
+  --pad: clamp(16px, 3.4vw, 56px);
+  --section: clamp(96px, 12vw, 180px);
+  --hdr: 68px;
+  --dna: linear-gradient(100deg, #7b68ee 0%, #d46fd0 52%, #5b9dff 100%);
+  --dna-soft: linear-gradient(135deg, #ebe7ff 0%, #fbe7f7 55%, #e4efff 100%);
+}
+@media (width >= 901px) {
+  :root { --hdr: 76px; }
+}
+
+/* =========================================================
+   Base
+   ========================================================= */
+@layer base {
+  /* anchor targets set their own scroll-margin-top to clear the fixed header */
+  html { -webkit-text-size-adjust: 100%; }
+  html.is-locked, html.is-locked body { overflow: hidden; }
+  body {
+    @apply bg-white font-sans text-base/[1.55] text-ink antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+  h1, h2 { @apply font-normal leading-[.94] tracking-[-.05em]; }
+  ::selection { @apply bg-violet text-white; }
+  :focus-visible { @apply rounded-md outline-2 outline-offset-3 outline-violet-ink; }
+  button { cursor: pointer; }
+  [data-lenis-prevent] { overscroll-behavior: contain; }
+}
+
+/* =========================================================
+   Custom utilities — the few looks plain utility classes can't express
+   ========================================================= */
+@utility bg-dna { background-image: var(--dna); }
+@utility bg-dna-soft { background-image: var(--dna-soft); }
+
+/* Gradient text is painted only inside its box: pad the box past the glyphs (cancelled by a negative margin, so
+   layout doesn't move) so the tails of g/p/y and the overhang left by the tight letter-spacing get painted too. */
+@utility grad-text {
+  background-image: var(--dna);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding: .1em .16em .28em .04em;
+  margin: -.1em -.16em -.28em -.04em;
+}
+
+/* Word mask for the split-text reveal: reaches past the line box the same way, so nothing is clipped. */
+@utility word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding: .12em .16em .3em .08em;
+  margin: -.12em -.16em -.3em -.08em;
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+/* layered glows behind sections */
+@utility bg-hero-glow {
+  background:
+    radial-gradient(50% 60% at 78% 40%, rgba(143, 126, 243, .1), transparent 70%),
+    radial-gradient(40% 40% at 10% 90%, rgba(106, 166, 255, .08), transparent 70%);
+}
+@utility bg-menu {
+  background:
+    radial-gradient(60% 50% at 0% 100%, rgba(143, 126, 243, .16), transparent 70%),
+    radial-gradient(40% 40% at 100% 0%, rgba(106, 166, 255, .12), transparent 70%),
+    #fbfbfe;
+}
+@utility bg-atlas {
+  background:
+    radial-gradient(42% 55% at 70% 50%, rgba(143, 126, 243, .18), transparent 70%),
+    radial-gradient(30% 40% at 90% 90%, rgba(106, 166, 255, .12), transparent 70%),
+    radial-gradient(circle at 1px 1px, rgba(14, 14, 18, .08) 1px, transparent 0) 0 0 / 28px 28px;
+}
+@utility bg-morph {
+  background:
+    radial-gradient(58% 58% at 50% 46%, rgba(143, 126, 243, .16), transparent 70%),
+    radial-gradient(circle at 1px 1px, rgba(14, 14, 18, .09) 1px, transparent 0) 0 0 / 24px 24px,
+    #fbfbfe;
+}
+@utility bg-appointment {
+  background:
+    radial-gradient(50% 40% at 90% 0%, rgba(143, 126, 243, .14), transparent 70%),
+    radial-gradient(40% 30% at 0% 30%, rgba(106, 166, 255, .1), transparent 70%);
+}
+@utility bg-intro-glow { background: radial-gradient(40% 40% at 50% 50%, rgba(143, 126, 243, .14), transparent 70%); }
+@utility bg-sos-card { background: radial-gradient(80% 80% at 100% 100%, rgba(229, 72, 77, .55), transparent 60%), #140c10; }
+@utility bg-book-card { background: linear-gradient(135deg, #5a45d6 0%, #b45fd1 55%, #4f8ef0 100%); }
+@utility bg-footer-word {
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, .9), rgba(143, 126, 243, .55) 55%, rgba(14, 14, 18, 0) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@utility mask-fade-x {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+/* a tick in a violet circle, used by checklists */
+@utility tick-icon {
+  background: #5a45d6 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12.5 4 4L18 8'/%3E%3C/svg%3E") center / 14px no-repeat;
+}
+
+/* =========================================================
+   Motion states
+   `motion-ok` is set on <html> before first paint when the visitor allows motion (see the root layout), so text
+   that animates in starts hidden instead of flashing.
+   ========================================================= */
+.motion-ok [data-split]:not([data-split-ready]) { visibility: hidden; }
+.motion-ok [data-reveal]:not([data-reveal-ready]),
+.motion-ok [data-lead]:not([data-lead-ready]) { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
